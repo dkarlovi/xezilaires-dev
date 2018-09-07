@@ -25,3 +25,4 @@ parameters:
           paths:
             - %currentWorkingDirectory%/tests/Xezilaires/Bridge/Spout/SpreadsheetTest.php
             - %currentWorkingDirectory%/tests/Xezilaires/Functional/FunctionalTestCase.php
+            - %currentWorkingDirectory%/tests/Xezilaires/Performance/PerformanceTestCase.php

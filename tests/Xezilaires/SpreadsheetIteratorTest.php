@@ -17,7 +17,9 @@ use Nyholm\NSA;
 use PHPUnit\Framework\MockObject\Builder\InvocationMocker;
 use PHPUnit\Framework\TestCase;
 use Xezilaires\Denormalizer;
+use Xezilaires\Exception\DenormalizerException;
 use Xezilaires\Exception\MappingException;
+use Xezilaires\Exception\SpreadsheetException;
 use Xezilaires\Iterator;
 use Xezilaires\Metadata\HeaderReference;
 use Xezilaires\Metadata\Mapping;
@@ -76,6 +78,10 @@ final class SpreadsheetIteratorTest extends TestCase
         $iterator->next();
     }
 
+    /**
+     * @throws SpreadsheetException
+     * @throws DenormalizerException
+     */
     public function testWillOfferAnDidYouMeanForInvalidHeader(): void
     {
         $spreadsheet = $this

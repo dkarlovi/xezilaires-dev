@@ -2,7 +2,7 @@ includes:
     - /tools/.composer/vendor-bin/phpstan/vendor/phpstan/phpstan-deprecation-rules/rules.neon
     - /tools/.composer/vendor-bin/phpstan/vendor/phpstan/phpstan-strict-rules/rules.neon
     - /tools/.composer/vendor-bin/phpstan/vendor/phpstan/phpstan-phpunit/extension.neon
-    # - /tools/.composer/vendor-bin/phpstan/vendor/pepakriz/phpstan-exception-rules/extension.neon
+    - /tools/.composer/vendor-bin/phpstan/vendor/pepakriz/phpstan-exception-rules/extension.neon
 parameters:
     tmpDir: %currentWorkingDirectory%/var/phpstan
     level: max
@@ -12,10 +12,8 @@ parameters:
         - var/
         - vendor/
     exceptionRules:
-        uncheckedExceptions:
-            - LogicException
-            - PHPUnit\Framework\Exception
-            - PHPUnit\Framework\MockObject\RuntimeException
+        checkedExceptions:
+            - RuntimeException
     ignoreErrors:
         - message: '#Access to an undefined property object\:\:\$scalar\.#'
           path: %currentWorkingDirectory%/tests/Xezilaires/FilterIteratorTest.php
@@ -25,3 +23,6 @@ parameters:
           paths:
             - %currentWorkingDirectory%/tests/Xezilaires/Bridge/Spout/SpreadsheetTest.php
             - %currentWorkingDirectory%/tests/Xezilaires/Functional/FunctionalTestCase.php
+        - message: '#Missing @throws .* annotation#'
+          paths:
+            - %currentWorkingDirectory%/tests

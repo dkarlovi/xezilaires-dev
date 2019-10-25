@@ -34,6 +34,9 @@ final class TreeBuilder
      */
     private $paths = [];
 
+    /**
+     * @throws NestableIteratorException
+     */
     public function __construct(Iterator $iterator, string $rootNode = 'Root')
     {
         $this->root = new Node($rootNode);
@@ -59,6 +62,8 @@ final class TreeBuilder
     }
 
     /**
+     * @throws NestableIteratorException
+     *
      * @return NodeInterface[]
      */
     public function getAncestors(?string $id): array
@@ -74,6 +79,9 @@ final class TreeBuilder
         return $this->paths[$id];
     }
 
+    /**
+     * @throws NestableIteratorException
+     */
     public function getPath(?string $id): string
     {
         return '/'.ltrim(
@@ -92,6 +100,8 @@ final class TreeBuilder
 
     /**
      * @param float|int|string $id
+     *
+     * @throws NestableIteratorException
      */
     private function fetch($id): NodeInterface
     {

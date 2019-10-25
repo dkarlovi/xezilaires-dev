@@ -42,6 +42,8 @@ final class Mapping
 
     /**
      * @param array<string, Reference> $references
+     *
+     * @throws MappingException
      */
     public function __construct(string $className, array $references, array $options = null)
     {
@@ -84,6 +86,9 @@ final class Mapping
         return $this->options[$option];
     }
 
+    /**
+     * @throws OptionsResolverException
+     */
     private function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
@@ -101,6 +106,8 @@ final class Mapping
 
     /**
      * @psalm-param string $className
+     *
+     * @throws MappingException
      */
     private function setClassName(string $className): void
     {
@@ -113,6 +120,8 @@ final class Mapping
 
     /**
      * @param array<string, object> $references
+     *
+     * @throws MappingException
      */
     private function setReferences(array $references): void
     {
@@ -142,6 +151,8 @@ final class Mapping
 
     /**
      * @param array<string, null|bool|string> $options
+     *
+     * @throws MappingException
      */
     private function setOptions(array $options): void
     {

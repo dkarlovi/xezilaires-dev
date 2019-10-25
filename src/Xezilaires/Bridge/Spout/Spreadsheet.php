@@ -51,9 +51,6 @@ final class Spreadsheet implements SpreadsheetInterface
         $this->file = $file;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function createIterator(int $startRowIndex): void
     {
         if (null !== $this->iterator) {
@@ -68,9 +65,6 @@ final class Spreadsheet implements SpreadsheetInterface
         $this->iterator = new RowIterator($iterator, $startRowIndex);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getIterator(): Iterator
     {
         if (null === $this->iterator) {
@@ -80,9 +74,6 @@ final class Spreadsheet implements SpreadsheetInterface
         return $this->iterator;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getRow(int $rowIndex): array
     {
         $iterator = $this->getIterator();
@@ -94,9 +85,6 @@ final class Spreadsheet implements SpreadsheetInterface
         return $row;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCurrentRow(): array
     {
         /** @var \ArrayObject $rowArrayObject */
@@ -118,9 +106,6 @@ final class Spreadsheet implements SpreadsheetInterface
         return $row;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getHighestRow(): int
     {
         if (null === $this->iterator) {
@@ -151,6 +136,9 @@ final class Spreadsheet implements SpreadsheetInterface
         return self::$indexCache[$columnIndex];
     }
 
+    /**
+     * @throws SpreadsheetException
+     */
     private function getReader(): ReaderInterface
     {
         if (null === $this->reader) {
@@ -170,6 +158,9 @@ final class Spreadsheet implements SpreadsheetInterface
         return $this->reader;
     }
 
+    /**
+     * @throws SpreadsheetException
+     */
     private function getActiveWorksheet(): SheetInterface
     {
         try {

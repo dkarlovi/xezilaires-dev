@@ -16,6 +16,7 @@ namespace Xezilaires;
 use Xezilaires\Bridge\Symfony\Serializer\Exception as SerializerException;
 use Xezilaires\Exception\DenormalizerException;
 use Xezilaires\Exception\MappingException;
+use Xezilaires\Exception\SpreadsheetException;
 use Xezilaires\Metadata\ArrayReference;
 use Xezilaires\Metadata\ColumnReference;
 use Xezilaires\Metadata\HeaderReference;
@@ -68,7 +69,8 @@ final class SpreadsheetIterator implements Iterator
     }
 
     /**
-     * {@inheritdoc}
+     * @throws SpreadsheetException
+     * @throws DenormalizerException
      */
     public function current(): object
     {

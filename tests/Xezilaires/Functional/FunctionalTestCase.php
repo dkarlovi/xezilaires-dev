@@ -138,7 +138,6 @@ abstract class FunctionalTestCase extends TestCase
      *
      * @throws \ReflectionException
      * @throws \RuntimeException
-     * @throws \ReflectionException
      */
     public function testCanLoadSparseFixtureWithAnnotations(): void
     {

@@ -1,13 +1,12 @@
 <?xml version="1.0"?>
-<psalm xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns="https://getpsalm.org/schema/config"
-       xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+<psalm xmlns="https://getpsalm.org/schema/config"
        cacheDirectory="var/psalm"
-       strictBinaryOperands="false"
+       checkForThrowsDocblock="true"
        totallyTyped="true">
-    
+
     <projectFiles>
-        <directory name="bin"/>
+        <directory name="bin/"/>
+        <directory name="docs/"/>
         <directory name="src/"/>
         <directory name="tests/"/>
         <ignoreFiles>
@@ -18,37 +17,42 @@
     <issueHandlers>
         <DeprecatedMethod>
             <errorLevel type="info">
-                 <file name="src/Xezilaires/Metadata/Annotation/AnnotationDriver.php" />
-             </errorLevel>
+                <file name="src/Xezilaires/Metadata/Annotation/AnnotationDriver.php"/>
+            </errorLevel>
         </DeprecatedMethod>
         <InvalidCatch>
             <errorLevel type="info">
-                <file name="src/Xezilaires/Metadata/Mapping.php" />
+                <file name="src/Xezilaires/Metadata/Mapping.php"/>
             </errorLevel>
         </InvalidCatch>
         <MissingConstructor>
             <errorLevel type="info">
-                <directory name="src/Xezilaires/Annotation/" />
-                <directory name="tests/Xezilaires/Model/" />
+                <directory name="src/Xezilaires/Annotation/"/>
+                <directory name="tests/Xezilaires/Model/"/>
             </errorLevel>
         </MissingConstructor>
+        <MissingThrowsDocblock>
+            <errorLevel type="info">
+                <directory name="tests/"/>
+            </errorLevel>
+        </MissingThrowsDocblock>
         <RedundantCondition>
             <errorLevel type="info">
-                <file name="src/Xezilaires/Metadata/Annotation/AnnotationDriver.php" />
+                <file name="src/Xezilaires/Metadata/Annotation/AnnotationDriver.php"/>
             </errorLevel>
         </RedundantCondition>
         <PropertyNotSetInConstructor>
             <errorLevel type="info">
-                <directory name="tests/Xezilaires/" />
+                <directory name="tests/Xezilaires/"/>
             </errorLevel>
         </PropertyNotSetInConstructor>
 
         <!-- false positives -->
         <MixedMethodCall>
             <errorLevel type="info">
-                <file name="tests/Xezilaires/Bridge/PhpSpreadsheet/RowIteratorTest.php" />
-                <file name="tests/Xezilaires/Bridge/Spout/RowIteratorTest.php" />
-                <file name="tests/Xezilaires/SpreadsheetIteratorTest.php" />
+                <file name="tests/Xezilaires/Bridge/PhpSpreadsheet/RowIteratorTest.php"/>
+                <file name="tests/Xezilaires/Bridge/Spout/RowIteratorTest.php"/>
+                <file name="tests/Xezilaires/SpreadsheetIteratorTest.php"/>
             </errorLevel>
         </MixedMethodCall>
     </issueHandlers>

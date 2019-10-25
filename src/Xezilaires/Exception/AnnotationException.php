@@ -16,7 +16,7 @@ namespace Xezilaires\Exception;
 use Doctrine\Common\Annotations\AnnotationException as DoctrineAnnotationException;
 use Xezilaires\Exception;
 
-final class AnnotationException extends \InvalidArgumentException implements Exception
+final class AnnotationException extends \UnexpectedValueException implements Exception
 {
     public static function unsupportedAnnotation(): self
     {

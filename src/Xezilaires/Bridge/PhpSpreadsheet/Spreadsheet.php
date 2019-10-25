@@ -49,9 +49,6 @@ final class Spreadsheet implements SpreadsheetInterface
         $this->file = $file;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function createIterator(int $startRowIndex): void
     {
         if (null !== $this->iterator) {
@@ -63,9 +60,6 @@ final class Spreadsheet implements SpreadsheetInterface
         $this->iterator = new RowIterator($sheet->getRowIterator($startRowIndex));
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getIterator(): Iterator
     {
         if (null === $this->iterator) {
@@ -75,9 +69,6 @@ final class Spreadsheet implements SpreadsheetInterface
         return $this->iterator;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCurrentRow(): array
     {
         /** @var Row $row */
@@ -86,9 +77,6 @@ final class Spreadsheet implements SpreadsheetInterface
         return $this->getRow($row->getRowIndex());
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getRow(int $rowIndex): array
     {
         $data = [];
@@ -103,14 +91,14 @@ final class Spreadsheet implements SpreadsheetInterface
         return $data;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getHighestRow(): int
     {
         return $this->getActiveWorksheet()->getHighestRow();
     }
 
+    /**
+     * @throws SpreadsheetException
+     */
     private function getSpreadsheet(): PhpSpreadsheet
     {
         if (null === $this->spreadsheet) {
@@ -130,6 +118,9 @@ final class Spreadsheet implements SpreadsheetInterface
         return $this->spreadsheet;
     }
 
+    /**
+     * @throws SpreadsheetException
+     */
     private function getActiveWorksheet(): Worksheet
     {
         try {
@@ -140,12 +131,18 @@ final class Spreadsheet implements SpreadsheetInterface
     }
 
     /**
+     * @throws SpreadsheetException
+     *
      * @return null|float|int|string
      */
     private function fetchCell(string $columnName, int $rowIndex)
     {
         $worksheet = $this->getActiveWorksheet();
-        $columnIndex = Coordinate::columnIndexFromString($columnName);
+        try {
+            $columnIndex = Coordinate::columnIndexFromString($columnName);
+        } catch (\Exception $exception) {
+            throw SpreadsheetException::invalidCell($exception);
+        }
 
         /** @var null|Cell $cell */
         $cell = $worksheet->getCellByColumnAndRow($columnIndex, $rowIndex, self::CELL_NO_AUTO_CREATE);

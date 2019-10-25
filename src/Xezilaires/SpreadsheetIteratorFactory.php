@@ -27,9 +27,6 @@ final class SpreadsheetIteratorFactory implements IteratorFactory
         $this->denormalizer = $denormalizer;
     }
 
-    /**
-     * @throws \RuntimeException
-     */
     public function fromFile(\SplFileObject $path, Mapping $mapping): Iterator
     {
         switch (true) {
@@ -40,7 +37,7 @@ final class SpreadsheetIteratorFactory implements IteratorFactory
                 $spreadsheet = new Bridge\Spout\Spreadsheet($path);
                 break;
             default:
-                throw new \RuntimeException('Install either phpoffice/phpspreadsheet or box/spout to read Excel files');
+                throw new \LogicException('Install either phpoffice/phpspreadsheet or box/spout to read Excel files');
         }
 
         return $this->fromSpreadsheet($spreadsheet, $mapping);

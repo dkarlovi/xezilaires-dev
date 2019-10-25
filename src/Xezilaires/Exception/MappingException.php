@@ -16,7 +16,7 @@ namespace Xezilaires\Exception;
 use Symfony\Component\OptionsResolver\Exception\ExceptionInterface;
 use Xezilaires\Exception;
 
-final class MappingException extends \InvalidArgumentException implements Exception
+final class MappingException extends \UnexpectedValueException implements Exception
 {
     public static function missingHeaderOption(): self
     {

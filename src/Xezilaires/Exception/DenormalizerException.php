@@ -16,7 +16,7 @@ namespace Xezilaires\Exception;
 use Xezilaires\Bridge\Symfony\Serializer\Exception as SerializerException;
 use Xezilaires\Exception;
 
-final class DenormalizerException extends \InvalidArgumentException implements Exception
+final class DenormalizerException extends \UnexpectedValueException implements Exception
 {
     public static function denormalizationFailed(SerializerException $exception): self
     {

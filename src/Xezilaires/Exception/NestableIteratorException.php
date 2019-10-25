@@ -15,7 +15,7 @@ namespace Xezilaires\Exception;
 
 use Xezilaires\Exception;
 
-final class NestableIteratorException extends \InvalidArgumentException implements Exception
+final class NestableIteratorException extends \UnexpectedValueException implements Exception
 {
     public static function iteratorMustBeNestable(): self
     {

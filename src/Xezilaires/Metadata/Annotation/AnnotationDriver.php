@@ -38,7 +38,7 @@ final class AnnotationDriver
     public function __construct(AnnotationReader $reader = null)
     {
         if (false === class_exists(AnnotationReader::class)) {
-            throw new \RuntimeException('Xezilaires annotations support requires Doctrine Annotations component. Install "doctrine/annotations" to use it.');
+            throw new \LogicException('Xezilaires annotations support requires Doctrine Annotations component. Install "doctrine/annotations" to use it.');
         }
         AnnotationRegistry::registerUniqueLoader('class_exists');
 

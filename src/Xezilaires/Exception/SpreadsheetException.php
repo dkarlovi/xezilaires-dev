@@ -15,7 +15,7 @@ namespace Xezilaires\Exception;
 
 use Xezilaires\Exception;
 
-final class SpreadsheetException extends \InvalidArgumentException implements Exception
+final class SpreadsheetException extends \UnexpectedValueException implements Exception
 {
     public static function noSpreadsheetFound(): self
     {

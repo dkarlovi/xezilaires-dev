@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Xezilaires\Bridge\Symfony\Command;
 
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Exception\InvalidArgumentException;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -42,6 +43,7 @@ final class SerializeCommand extends Command
 
     public function __construct(SpreadsheetIteratorFactory $iteratorFactory, Serializer $serializer)
     {
+        /** @psalm-suppress MissingThrowsDocblock */
         parent::__construct('xezilaires:serialize');
 
         $this->setDescription('Serialize Excel files into JSON, XML, CSV');
@@ -51,7 +53,7 @@ final class SerializeCommand extends Command
     }
 
     /**
-     * {@inheritdoc}
+     * @throws InvalidArgumentException
      */
     protected function configure(): void
     {
@@ -65,7 +67,7 @@ final class SerializeCommand extends Command
     }
 
     /**
-     * @throws \ReflectionException
+     * @throws InvalidArgumentException
      * @throws \RuntimeException
      * @throws \ReflectionException
      */
@@ -86,14 +88,15 @@ final class SerializeCommand extends Command
         $xmlRoot = $input->getOption('xml-root');
 
         if (null === $format) {
-            throw new \RuntimeException('Format is required');
+            throw new \UnexpectedValueException('Format is required');
         }
 
         $context = [];
         switch ($format) {
             case 'csv':
                 if (false === class_exists(CsvEncoder::class)) {
-                    throw new \RuntimeException('CSV format is only available with Symfony 4.0+');
+                    /** @psalm-suppress MissingThrowsDocblock */
+                    throw new \LogicException('CSV format is only available with Symfony 4.0+');
                 }
                 break;
             case 'json':
@@ -101,7 +104,7 @@ final class SerializeCommand extends Command
                 break;
             case 'xml':
                 if (null === $xmlRoot) {
-                    throw new \RuntimeException('XML root node name cannot be empty if XML format requested');
+                    throw new \UnexpectedValueException('XML root node name cannot be empty if XML format requested');
                 }
                 $context['xml_root_node_name'] = $xmlRoot;
                 break;

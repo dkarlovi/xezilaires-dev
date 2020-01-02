@@ -44,6 +44,9 @@ psalm: ensure
 phpunit:
 	sh -c "${PHPQA_DOCKER_COMMAND} vendor/bin/phpunit --verbose"
 
+benchmark: ensure
+	sh -c "${PHPQA_DOCKER_COMMAND} phpbench run --iterations=10 --report=aggregate -v"
+
 phpunit-coverage: ensure
 	sh -c "${PHPQA_DOCKER_COMMAND} phpdbg -qrr vendor/bin/phpunit --verbose --coverage-text --log-junit=var/junit.xml --coverage-xml var/coverage-xml/"
 

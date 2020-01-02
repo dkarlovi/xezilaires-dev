@@ -26,6 +26,7 @@
         "nicmart/tree": "^0.2,>= 0.2.4",
         "nyholm/nsa": "^1.1",
         "nyholm/symfony-bundle-test": "^1.4",
+        "phpbench/phpbench": "^0.16",
         "phpoffice/phpspreadsheet": "^1.4,>= 1.4.1",
         "phpunit/phpunit": "^7.0 || ^8.5",
         "symfony/console": "^3.4 || ^4.0 || ^5.0",

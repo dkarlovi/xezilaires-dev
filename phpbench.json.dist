@@ -1,0 +1,18 @@
+{
+    "bootstrap": "vendor/autoload.php",
+    "path": "tests/Xezilaires/Performance",
+
+    "retry_threshold": 5,
+    "progress": "dots",
+
+    "annotation_import_use": true,
+    "extensions": [
+        "PhpBench\\Extensions\\Dbal\\DbalExtension",
+        "PhpBench\\Extensions\\XDebug\\XDebugExtension"
+    ],
+    "storage": "dbal",
+    "storage.dbal.connection": {
+        "driver": "pdo_sqlite",
+        "path": "var/phpbench-history.db"
+    }
+}

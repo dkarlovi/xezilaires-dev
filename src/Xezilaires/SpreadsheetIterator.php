@@ -21,6 +21,9 @@ use Xezilaires\Metadata\HeaderReference;
 use Xezilaires\Metadata\Mapping;
 use Xezilaires\Metadata\Reference;
 
+/**
+ * @implements Iterator<object>
+ */
 final class SpreadsheetIterator implements Iterator
 {
     /**
@@ -44,7 +47,7 @@ final class SpreadsheetIterator implements Iterator
     private $context;
 
     /**
-     * @var null|Iterator
+     * @var null|Iterator<object>
      */
     private $iterator;
 
@@ -136,6 +139,9 @@ final class SpreadsheetIterator implements Iterator
         $this->getIterator()->seek($start + $rowIndex);
     }
 
+    /**
+     * @return Iterator<object>
+     */
     private function getIterator(): Iterator
     {
         if (null === $this->iterator) {

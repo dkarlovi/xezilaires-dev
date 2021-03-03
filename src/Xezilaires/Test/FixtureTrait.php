@@ -20,19 +20,28 @@ trait FixtureTrait
 {
     private function fixture(string $name): \SplFileObject
     {
-        return new \SplFileObject(__DIR__.'/resources/fixtures/'.$name);
+        try {
+            return new \SplFileObject(__DIR__.'/resources/fixtures/'.$name);
+        } catch (\RuntimeException $exception) {
+            throw new \LogicException(sprintf('Invalid fixture name: %1$s', $name), 0, $exception);
+        }
     }
 
     private function invalidFixture(string $name): \SplFileObject
     {
-        return new class(__DIR__.'/resources/fixtures/'.$name) extends \SplFileObject {
-            /**
-             * @psalm-suppress ImplementedReturnTypeMismatch Invalid by design
-             */
-            public function getRealPath(): bool
-            {
-                return false;
-            }
-        };
+        try {
+            return new class(__DIR__.'/resources/fixtures/'.$name) extends \SplFileObject {
+                /**
+                 * @psalm-suppress ImplementedReturnTypeMismatch Invalid by design
+                 * @phpstan-ignore-next-line
+                 */
+                public function getRealPath(): bool
+                {
+                    return false;
+                }
+            };
+        } catch (\RuntimeException $exception) {
+            throw new \LogicException(sprintf('Invalid fixture name: %1$s', $name), 0, $exception);
+        }
     }
 }

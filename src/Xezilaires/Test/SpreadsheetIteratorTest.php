@@ -37,6 +37,7 @@ use Xezilaires\SpreadsheetIterator;
  * @internal
  *
  * @small
+ * @template T of object
  */
 final class SpreadsheetIteratorTest extends TestCase
 {
@@ -163,6 +164,8 @@ final class SpreadsheetIteratorTest extends TestCase
 
     /**
      * @param null|array<string, array<string, null|array<int>|bool|int>> $counts
+     *
+     * @return Iterator<T>
      */
     private function mockIterator(?array $counts = null): Iterator
     {
@@ -176,7 +179,7 @@ final class SpreadsheetIteratorTest extends TestCase
                 /** @var int $count */
                 $count = $spec['count'];
 
-                /** @var InvocationMocker $mocker */
+                /** @var InvocationMocker<Iterator<T>> $mocker */
                 $mocker = $iterator
                     ->expects(static::exactly($count))
                     ->method($method)

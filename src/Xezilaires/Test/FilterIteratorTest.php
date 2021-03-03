@@ -29,7 +29,10 @@ final class FilterIteratorTest extends TestCase
     {
         $iterator = new FakeIterator([1, 2, 3, 4, 5]);
         $filter = new FilterIterator($iterator, static function (object $item): bool {
-            /** @var int $scalar */
+            /**
+             * @var int $scalar
+             * @phpstan-ignore-next-line
+             */
             $scalar = $item->scalar;
 
             return $scalar % 2 === 0;
@@ -42,7 +45,10 @@ final class FilterIteratorTest extends TestCase
     {
         $iterator = new FakeIterator(['ba', 'abba', 'boo', 'bae', 'nba', 'ab', 'ban']);
         $filter = new FilterIterator($iterator, static function (object $item): bool {
-            /** @var string $scalar */
+            /**
+             * @var string $scalar
+             * @phpstan-ignore-next-line
+             */
             $scalar = $item->scalar;
 
             return false !== mb_strpos($scalar, 'ba');

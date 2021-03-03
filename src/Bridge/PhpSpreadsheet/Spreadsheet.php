@@ -25,6 +25,9 @@ use Xezilaires\Exception\SpreadsheetException;
 use Xezilaires\Iterator;
 use Xezilaires\Spreadsheet as SpreadsheetInterface;
 
+/**
+ * @implements SpreadsheetInterface<object>
+ */
 final class Spreadsheet implements SpreadsheetInterface
 {
     private const CELL_NO_AUTO_CREATE = false;

@@ -13,6 +13,9 @@ declare(strict_types=1);
 
 namespace Xezilaires;
 
+/**
+ * @template T of object
+ */
 interface Spreadsheet
 {
     public static function fromFile(\SplFileObject $file): self;
@@ -22,6 +25,9 @@ interface Spreadsheet
      */
     public function createIterator(int $startRowIndex): void;
 
+    /**
+     * @return Iterator<T>
+     */
     public function getIterator(): Iterator;
 
     /**

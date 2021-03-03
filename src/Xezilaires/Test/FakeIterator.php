@@ -17,11 +17,12 @@ use Xezilaires\Iterator;
 
 /**
  * @internal
+ * @implements Iterator<object>
  */
 final class FakeIterator implements Iterator
 {
     /**
-     * @var \ArrayIterator
+     * @var \ArrayIterator<int, object>
      */
     private $iterator;
 
@@ -32,7 +33,10 @@ final class FakeIterator implements Iterator
     {
         $objects = [];
         foreach ($items as $idx => $item) {
-            $objects[$idx] = (object) $item;
+            /** @var object $object */
+            $object = (object) $item;
+
+            $objects[$idx] = $object;
         }
 
         $this->iterator = new \ArrayIterator($objects);

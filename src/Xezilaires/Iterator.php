@@ -13,6 +13,10 @@ declare(strict_types=1);
 
 namespace Xezilaires;
 
+/**
+ * @template TValue of object
+ * @extends \Iterator<int, TValue>
+ */
 interface Iterator extends \Iterator
 {
     public function current(): object;

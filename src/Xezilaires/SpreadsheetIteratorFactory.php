@@ -15,6 +15,9 @@ namespace Xezilaires;
 
 use Xezilaires\Metadata\Mapping;
 
+/**
+ * @template T of object
+ */
 final class SpreadsheetIteratorFactory implements IteratorFactory
 {
     /**
@@ -23,12 +26,12 @@ final class SpreadsheetIteratorFactory implements IteratorFactory
     private $denormalizer;
 
     /**
-     * @var array<class-string<Spreadsheet>>
+     * @var array<class-string<Spreadsheet<T>>>
      */
     private $spreadsheetClasses;
 
     /**
-     * @param array<class-string<Spreadsheet>> $spreadsheetClasses
+     * @param array<class-string<Spreadsheet<T>>> $spreadsheetClasses
      */
     public function __construct(Denormalizer $denormalizer, array $spreadsheetClasses)
     {
@@ -37,7 +40,7 @@ final class SpreadsheetIteratorFactory implements IteratorFactory
     }
 
     /**
-     * @throws \RuntimeException
+     * @return Iterator<T>
      */
     public function fromFile(\SplFileObject $file, Mapping $mapping): Iterator
     {
@@ -45,9 +48,12 @@ final class SpreadsheetIteratorFactory implements IteratorFactory
             return $this->fromSpreadsheet($spreadsheetClass::fromFile($file), $mapping);
         }
 
-        throw new \RuntimeException('Install either phpoffice/phpspreadsheet or box/spout to read Excel files');
+        throw new \LogicException('Install either phpoffice/phpspreadsheet or box/spout to read Excel files');
     }
 
+    /**
+     * @return Iterator<T>
+     */
     public function fromSpreadsheet(Spreadsheet $spreadsheet, Mapping $mapping): Iterator
     {
         return new SpreadsheetIterator($spreadsheet, $mapping, $this->denormalizer);

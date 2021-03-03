@@ -34,6 +34,11 @@ final class TreeBuilder
      */
     private $paths = [];
 
+    /**
+     * @template T of object
+     *
+     * @param Iterator<T> $iterator
+     */
     public function __construct(Iterator $iterator, string $rootNode = 'Root')
     {
         $this->root = new Node($rootNode);

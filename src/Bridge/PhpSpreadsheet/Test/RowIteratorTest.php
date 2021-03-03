@@ -86,7 +86,7 @@ final class RowIteratorTest extends TestCase
                 /** @var int $count */
                 $count = $spec['count'];
 
-                /** @var InvocationMocker $mocker */
+                /** @var InvocationMocker<PhpspreadsheetRowIterator> $mocker */
                 $mocker = $iterator
                     ->expects(static::exactly($count))
                     ->method($method)

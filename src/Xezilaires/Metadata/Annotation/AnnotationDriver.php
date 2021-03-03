@@ -23,6 +23,8 @@ use Xezilaires\Metadata\Mapping;
 
 /**
  * @internal
+ *
+ * @template T as object
  */
 final class AnnotationDriver
 {
@@ -50,16 +52,19 @@ final class AnnotationDriver
     /**
      * @throws \ReflectionException
      *
-     * @psalm-param class-string $className
+     * @psalm-param class-string<T> $className
      */
     public function getMetadataMapping(string $className, ?array $options = null): Mapping
     {
+        /** @var \ReflectionClass<T> $reflectionClass */
         $reflectionClass = new \ReflectionClass($className);
 
         return new Mapping($className, $this->getColumns($reflectionClass), $this->getOptions($reflectionClass, $options));
     }
 
     /**
+     * @psalm-param \ReflectionClass<T> $reflectionClass
+     *
      * @return array<string, \Xezilaires\Metadata\Reference>
      */
     private function getColumns(\ReflectionClass $reflectionClass): array
@@ -116,6 +121,9 @@ final class AnnotationDriver
         return $columns;
     }
 
+    /**
+     * @psalm-param \ReflectionClass<T> $reflectionClass
+     */
     private function getOptions(\ReflectionClass $reflectionClass, ?array $additionalOptions = null): array
     {
         $options = (array) $this->reader->getClassAnnotation($reflectionClass, Annotation\Options::class);
